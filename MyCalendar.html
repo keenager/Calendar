@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar for MIYOUNG</title>
+    <meta charset="utf8">
+    <link rel="stylesheet" href="MyCalendar.css">
+</head>
+<body>
+    <table style="width: 100%; text-align: center;">
+        <tr id="title">
+            <td colspan="7">
+                <button onclick="presentMonth()">이번 달</button>
+                <button onclick="prevMonth()"><</button>
+                <span id="yearMonth"></span>
+                <button onclick="nextMonth()">></button>
+            </td>
+        </tr>
+        <tr>
+            <td>월요일</td>
+            <td>화요일</td>
+            <td>수요일</td>
+            <td>목요일</td>
+            <td>금요일</td>
+            <td>토요일</td>
+            <td>일요일</td>
+        </tr>
+        <!-- 1st week  -->
+        <tr id="0"></tr>
+        <!-- 2nd week -->
+        <tr id="1"></tr>
+        <!-- 3rd week  -->
+        <tr id="2"></tr>
+        <!-- 4th week  -->
+        <tr id="3"></tr>
+        <!-- 5th week  -->
+        <tr id="4"></tr>
+        <!-- 6th week  -->
+        <tr id="5"></tr>
+    </table>
+    <script src="MyCalendar.js"></script>
+</body>
+</html>
