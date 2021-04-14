@@ -8,11 +8,11 @@ table {
   height: fit-content; 
 }
 
-{
+daynum{
   height: fit-content;
   text-align: left;
 }
 
-{
+daycontent{
   height: 80%
 }
