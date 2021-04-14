@@ -3,3 +3,7 @@ table {
   height: 100vh;
   text-align: center;
 }
+
+#title, weekname {
+  height: fit-content; 
+}
