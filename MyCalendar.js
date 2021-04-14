@@ -44,7 +44,12 @@ function displayCalendar(){
                 week.insertAdjacentHTML('beforeend', '<td></td>');
             }else{
                 cnt++;
-                week.insertAdjacentHTML('beforeend', `<td>${cnt}</td>`);
+                week.insertAdjacentHTML('beforeend', `
+                    <td>
+                        <div class='daynum'>${cnt}</div>
+                        <div class='daycontent'></div>
+                    </td>
+                `);
             }
             if(cnt === lastDate[thisMonth]){
                 thisLastDay = j;
