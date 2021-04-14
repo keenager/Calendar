@@ -4,6 +4,6 @@ table {
   text-align: center;
 }
 
-#title, weekname {
+#title, #weekname {
   height: fit-content; 
 }
