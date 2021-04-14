@@ -7,3 +7,12 @@ table {
 #title, #weekname {
   height: fit-content; 
 }
+
+{
+  height: fit-content;
+  text-align: left;
+}
+
+{
+  height: 80%
+}
