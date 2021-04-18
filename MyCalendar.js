@@ -47,7 +47,7 @@ function displayCalendar(){
                 week.insertAdjacentHTML('beforeend', `
                     <td>
                         <div class='daynum'>${cnt}</div>
-                        <div class='daycontent'></div>
+                        <div class='daycontent' onclick='addContents(this)'></div>
                     </td>
                 `);
             }
@@ -103,4 +103,8 @@ function nextMonth(){
     displayTitle();
     deleteCalendar()
     displayCalendar();
+}
+
+function addContents(self){
+    console.log(self);
 }
