@@ -6,6 +6,7 @@ var thisDay = present.getDay();  // 요일 0~6   일요일 = 0, 월요일 = 1
 var firstDay = 0;
 var lastDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var thisLastDay = 0;
+var storage = window.localStorage;
 
 function getFirstDay(thisDate, thisDay){    //해당 월의 1일의 요일
     if(thisDay === 0) thisDay = 7;
@@ -21,8 +22,8 @@ function displayTitle(){
 }
 
 function deleteCalendar(){
-    var i = 0;
-    while(i < 6){
+    var i = 1;
+    while(i <= 6){
         var week = document.getElementById(i.toString());
         while(week.hasChildNodes()){
             week.removeChild(week.firstChild);
@@ -36,20 +37,30 @@ function displayCalendar(){
     if(thisYear % 4 === 0) lastDate[1] = 29;
     var cnt = 0;
     loop1:
-    for(var i = 0; i < 6; i++){
+    for(var i = 1; i <= 6; i++){
         var week = document.getElementById(i.toString());
         loop2:
         for(var j = 1; j <= 7; j++){
-            if(i===0 && j<firstDay){
+            if(i===1 && j<firstDay){
                 week.insertAdjacentHTML('beforeend', '<td></td>');
             }else{
                 cnt++;
+                var dateId = '' + thisYear + (thisMonth+1) + cnt;
                 week.insertAdjacentHTML('beforeend', `
                     <td>
                         <div class='daynum'>${cnt}</div>
-                        <div class='daycontent' onclick='addContents(this)'></div>
+                        <div class='daycontent' id=${dateId} onclick="addContents(this);"></div>
                     </td>
                 `);
+
+/* li 마다 id값을 부여하고 반복문으로 불러낼 것인가... or 웹 데이터베이스 공부? */
+
+                var tmp = document.getElementById(dateId);
+                var scd = storage.getItem(dateId);
+                if(scd != null){
+                    var li = document.createElement('li');
+                    tmp.appendChild(li).textContent = scd;
+                }
             }
             if(cnt === lastDate[thisMonth]){
                 thisLastDay = j;
@@ -106,5 +117,14 @@ function nextMonth(){
 }
 
 function addContents(self){
-    console.log(self);
+    var schedule = prompt('일정을 입력하세요');
+    //console.log('현재 객체는 ' + self);
+    if( schedule === null || schedule === ''){
+        
+    } else{
+        storage.setItem(self.id, schedule);
+        var li = document.createElement('li');
+        self.appendChild(li).textContent = schedule;    
+    }
 }
+
