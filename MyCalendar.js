@@ -121,7 +121,7 @@ function addContents(self){
     //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
     inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
-    console.log(inputWindow.document.getElementById('dateId'));
+    inputWindow.document.getElementById('dateId').innerText = self.id;
 
         // storage.setItem(self.id, schedule);
         // var li = document.createElement('li');
