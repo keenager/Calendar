@@ -7,6 +7,7 @@ var firstDay = 0;
 var lastDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var thisLastDay = 0;
 var inputWindow;
+var dateId = '';
 var storage = window.localStorage;
 
 function getFirstDay(thisDate, thisDay){    //해당 월의 1일의 요일
@@ -46,7 +47,7 @@ function displayCalendar(){
                 week.insertAdjacentHTML('beforeend', '<td></td>');
             }else{
                 cnt++;
-                var dateId = '' + thisYear + (thisMonth+1) + cnt;
+                dateId = '' + thisYear + (thisMonth+1) + cnt;
                 week.insertAdjacentHTML('beforeend', `
                     <td>
                         <div class='daynum'>${cnt}</div>
@@ -121,7 +122,8 @@ function addContents(self){
     //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
     inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
-    inputWindow.document.getElementById('dateId').innerText = self.id;
+    dateId = self.id;
+    inputWindow.document.getElementById('dateId').innerText = dateId;
 
         // storage.setItem(self.id, schedule);
         // var li = document.createElement('li');
