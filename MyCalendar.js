@@ -6,6 +6,7 @@ var thisDay = present.getDay();  // 요일 0~6   일요일 = 0, 월요일 = 1
 var firstDay = 0;
 var lastDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var thisLastDay = 0;
+var inputWindow;
 var storage = window.localStorage;
 
 function getFirstDay(thisDate, thisDay){    //해당 월의 1일의 요일
@@ -117,14 +118,14 @@ function nextMonth(){
 }
 
 function addContents(self){
-    var schedule = prompt('일정을 입력하세요');
+    //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
-    if( schedule === null || schedule === ''){
-        
-    } else{
-        storage.setItem(self.id, schedule);
-        var li = document.createElement('li');
-        self.appendChild(li).textContent = schedule;    
-    }
+    inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
+    inputWindow.document.getElementById('dateId').innerText = self.id;
+
+        // storage.setItem(self.id, schedule);
+        // var li = document.createElement('li');
+        // self.appendChild(li).textContent = schedule;    
+    
 }
 
