@@ -9,13 +9,16 @@
 <body>
     <p><span id="dateId"></span>의 일정을 입력하세요.</p>
     <input type="text" size="3" style="text-align: right;">시<br>
-    <textarea name="" id="" cols="30" rows="5"></textarea>
+    <textarea name="" id="contents" cols="30" rows="5"></textarea>
     <button onclick="setSchedule()">저장</button>
     <button onclick="window.close()">닫기</button>
 
     <script>
         document.getElementById('dateId').innerText = opener.dateId;
         function setSchedule(){
+            var li = opener.document.createElement('li');
+            var contents = document.getElementById('schedule').value;
+            opener.document.getElementById(dateId).appendChild(li).textContent = contents;
         }
     </script>
 </body>
