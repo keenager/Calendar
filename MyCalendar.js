@@ -51,7 +51,7 @@ function displayCalendar(){
                 week.insertAdjacentHTML('beforeend', `
                     <td>
                         <div class='daynum'>${cnt}</div>
-                        <div class='daycontent' id=${dateId} onclick="addContents(this);"></div>
+                        <div class='daycontent' id=${dateId} onclick="openInputWindow(this)"></div>
                     </td>
                 `);
 
@@ -118,12 +118,12 @@ function nextMonth(){
     displayCalendar();
 }
 
-function addContents(self){
+function openInputWindow(self){
     //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
     inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
     dateId = self.id;
-    inputWindow.document.getElementById('dateId').innerText = dateId;
+    //inputWindow.document.getElementById('dateId').innerText = self.id;
 
         // storage.setItem(self.id, schedule);
         // var li = document.createElement('li');
