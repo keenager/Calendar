@@ -7,19 +7,25 @@
     <script src="MyCalendar.js"></script>
 </head>
 <body>
-    <p><span id="dateId"></span>의 일정을 입력하세요.</p>
-    <input type="text" size="3" style="text-align: right;">시<br>
-    <textarea name="" id="contents" cols="30" rows="5"></textarea>
-    <button onclick="setSchedule()">저장</button>
-    <button onclick="window.close()">닫기</button>
+    <fieldset style="width: fit-content;">
+        <legend><span id="dateId"></span>의 일정을 입력하세요.</legend>
+        <input type="text" id="time" size="3" style="text-align: right;">시<br>
+        <textarea name="" id="contents" cols="30" rows="5"></textarea>
+        <button onclick="setSchedule()">저장&닫기</button>
+    </fieldset>
 
     <script>
-        document.getElementById('dateId').innerText = opener.dateId;
+
+        // 현재는 한 날에 일정 하나 밖에 저장 안됨. id값을 dateId 하나로만 사용하기 때문
+        // dateId 외에 개별 일정마다 시간을 추가한 contentsId 부여하여 개별 일정 구별하여 저장하기.
+
+        document.getElementById('dateId').textContent = opener.dateId;
         function setSchedule(){
             var li = opener.document.createElement('li');
             var contents = document.getElementById('contents').value;
             opener.storage.setItem(String(opener.dateId), contents);
             opener.document.getElementById(String(opener.dateId)).appendChild(li).textContent = contents;
+            window.close();
         }
     </script>
 </body>

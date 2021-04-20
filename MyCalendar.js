@@ -8,6 +8,7 @@ var lastDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var thisLastDay = 0;
 var inputWindow;
 var dateId = '';
+var contentsId = '';
 var storage = window.localStorage;
 
 function getFirstDay(thisDate, thisDay){    //해당 월의 1일의 요일
