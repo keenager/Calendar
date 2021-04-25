@@ -37,6 +37,8 @@
             var contentsId = String(opener.dateId) + time;
             opener.storage.setItem(contentsId, contents);
             opener.document.getElementById(String(opener.dateId)).appendChild(li).textContent = contents;
+            opener.deleteCalendar();
+            opener.displayCalendar();
             window.close();
         }
     </script>
