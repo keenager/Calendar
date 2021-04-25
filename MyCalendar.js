@@ -38,7 +38,8 @@ function deleteCalendar(){
 function displayCalendar(){
     firstDay = getFirstDay(thisDate, thisDay);
     if(thisYear % 4 === 0) lastDate[1] = 29;
-    var cnt = 0;
+    //var cnt = 0;
+    thisDate = 1;
     loop1:
     for(var i = 1; i <= 6; i++){
         var week = document.getElementById(i.toString());
@@ -47,15 +48,15 @@ function displayCalendar(){
             if(i===1 && j<firstDay){
                 week.insertAdjacentHTML('beforeend', '<td></td>');
             }else{
-                cnt++;
-                dateId = '' + thisYear + (thisMonth+1) + cnt;
+                //cnt++;
+                dateId = '' + thisYear + (thisMonth+1) + thisDate;
                 week.insertAdjacentHTML('beforeend', `
                     <td>
-                        <div class='daynum'>${cnt}</div>
+                        <div class='daynum'>${thisDate}</div>
                         <div class='daycontent' id=${dateId} onclick="openInputWindow(this)"></div>
                     </td>
                 `);
-
+                
 /* li 마다 id값을 부여하고 반복문으로 불러낼 것인가... or 웹 데이터베이스 공부? */
 
                 var tmp = document.getElementById(dateId);
@@ -68,10 +69,11 @@ function displayCalendar(){
                     }
                     k++;
                 }
-            }
-            if(cnt === lastDate[thisMonth]){
-                thisLastDay = j;
-                break loop1;
+                if(thisDate === lastDate[thisMonth]){
+                    thisLastDay = j;
+                    break loop1;
+                }
+                thisDate++;
             }
         }
     }
