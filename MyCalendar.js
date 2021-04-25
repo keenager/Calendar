@@ -53,7 +53,7 @@ function displayCalendar(){
                 week.insertAdjacentHTML('beforeend', `
                     <td>
                         <div class='daynum'>${thisDate}</div>
-                        <div class="${j}" id="${thisDate}" onclick="openInputWindow(this)"> </div>
+                        <div class="day${j}" id="${thisDate}" onclick="openInputWindow(this)"> </div>
                     </td>
                 `);
                 
