@@ -64,7 +64,7 @@ function displayCalendar(){
                 while(k <= 24){
                     if(storage.getItem(dateId + k) != null){
                         var li = document.createElement('li');
-                        tmp.appendChild(li).textContent = storage.getItem(dateId + k);
+                        tmp.appendChild(li).textContent = k + '시: ' storage.getItem(dateId + k);
                     }
                     k++;
                 }
