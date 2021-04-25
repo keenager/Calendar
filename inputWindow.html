@@ -9,12 +9,22 @@
 <body>
     <fieldset style="width: fit-content;">
         <legend><span id="dateId"></span>의 일정을 입력하세요.</legend>
-        <input type="text" id="time" size="3" style="text-align: right;"/>시 <br>
+        <label for="time">시각(0~24): </label>
+        <input type="number" min="0" max="24" list="numberList" id="time" style="width: 3em; text-align: right;"/>시
+        <datalist id="numberList">
+        </datalist><br>
         <textarea name="" id="contents" cols="30" rows="5"></textarea>
         <button onclick="setSchedule()">저장&닫기</button>
     </fieldset>
 
     <script>
+        var i = 0;
+        var option = '';
+        while(i<=24){
+            option += `<option value="${i}">`;
+            i++;
+        }
+        document.getElementById('numberList').innerHTML = option;
 
         // 현재는 한 날에 일정 하나 밖에 저장 안됨. id값을 dateId 하나로만 사용하기 때문
         // dateId 외에 개별 일정마다 시간을 추가한 contentsId 부여하여 개별 일정 구별하여 저장하기.
