@@ -49,7 +49,7 @@ function displayCalendar(){
                 week.insertAdjacentHTML('beforeend', '<td></td>');
             }else{
                 //cnt++;
-                dateId = '' + thisYear + (thisMonth+1) + thisDate;
+                //dateId = '' + thisYear + (thisMonth+1) + thisDate;
                 week.insertAdjacentHTML('beforeend', `
                     <td>
                         <div class='daynum'>${thisDate}</div>
