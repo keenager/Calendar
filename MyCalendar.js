@@ -42,7 +42,7 @@ function displayCalendar(){
     thisDate = 1;
     loop1:
     for(var i = 1; i <= 6; i++){
-        var week = document.getElementById(i.toString());
+        var week = document.getElementById('w'+i);
         loop2:
         for(var j = 1; j <= 7; j++){
             if(i===1 && j<firstDay){
