@@ -130,9 +130,10 @@ function nextMonth(){
 function openInputWindow(self){
     //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
-    inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
     thisDate = Number(self.id);
     thisDay = Number(self.class);
+    inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
+    
     //inputWindow.document.getElementById('dateId').innerText = self.id;
 
         // storage.setItem(self.id, schedule);
