@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>일정 입력</title>
     <meta charset="utf8">
     <link rel="stylesheet" href="">
     <script src="MyCalendar.js"></script>
@@ -9,7 +9,7 @@
 <body>
     <fieldset style="width: fit-content;">
         <legend><span id="dateId"></span>의 일정을 입력하세요.</legend>
-        <input type="text" id="time" size="3" style="text-align: right;">시<br>
+        <input type="text" id="time" size="3" style="text-align: right;"/>시 <br>
         <textarea name="" id="contents" cols="30" rows="5"></textarea>
         <button onclick="setSchedule()">저장&닫기</button>
     </fieldset>
@@ -22,8 +22,10 @@
         document.getElementById('dateId').textContent = opener.dateId;
         function setSchedule(){
             var li = opener.document.createElement('li');
+            var time = document.getElementById('time').value;
             var contents = document.getElementById('contents').value;
-            opener.storage.setItem(String(opener.dateId), contents);
+            var contentsId = String(opener.dateId) + time;
+            opener.storage.setItem(contentsId, contents);
             opener.document.getElementById(String(opener.dateId)).appendChild(li).textContent = contents;
             window.close();
         }
