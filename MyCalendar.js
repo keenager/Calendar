@@ -27,7 +27,7 @@ function displayTitle(){
 function deleteCalendar(){
     var i = 1;
     while(i <= 6){
-        var week = document.getElementById(i.toString());
+        var week = document.getElementById('w'+i);
         while(week.hasChildNodes()){
             week.removeChild(week.firstChild);
         }
