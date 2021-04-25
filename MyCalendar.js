@@ -60,9 +60,13 @@ function displayCalendar(){
 
                 var tmp = document.getElementById(dateId);
                 var scd = storage.getItem(dateId);
-                if(scd != null){
-                    var li = document.createElement('li');
-                    tmp.appendChild(li).textContent = scd;
+                var i = 0;
+                while(i <= 24){
+                    if(storage.getItem(dateId + i) != null){
+                        var li = document.createElement('li');
+                        tmp.appendChild(li).textContent = storage.getItem(dateId + i);
+                    }
+                    i++;
                 }
             }
             if(cnt === lastDate[thisMonth]){
