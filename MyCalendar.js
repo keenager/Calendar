@@ -53,7 +53,7 @@ function displayCalendar(){
                 week.insertAdjacentHTML('beforeend', `
                     <td>
                         <div class='daynum'>${thisDate}</div>
-                        <div class='daycontent' id=${thisDate} onclick="openInputWindow(this)"></div>
+                        <div class=${j} id=${thisDate} onclick="openInputWindow(this)"></div>
                     </td>
                 `);
                 
@@ -75,6 +75,7 @@ function displayCalendar(){
                     break loop1;
                 }
                 thisDate++;
+                
             }
         }
     }
@@ -131,6 +132,7 @@ function openInputWindow(self){
     //console.log('현재 객체는 ' + self);
     inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
     dateId = self.id;
+    thisDay = self.class;
     //inputWindow.document.getElementById('dateId').innerText = self.id;
 
         // storage.setItem(self.id, schedule);

@@ -38,7 +38,7 @@
             opener.storage.setItem(contentsId, contents);
             //opener.document.getElementById(String(opener.dateId)).appendChild(li).textContent = contents;
             opener.deleteCalendar();
-            opener.displayCalendar();
+            opener.displayCalendar();   // 달력 갱신할 때 날짜와 그 날짜의 요일이 필요하다.
             window.close();
         }
     </script>
