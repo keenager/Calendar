@@ -59,8 +59,9 @@ function displayCalendar(){
                 
 /* li 마다 id값을 부여하고 반복문으로 불러낼 것인가... or 웹 데이터베이스 공부? */
 
-                var tmp = document.getElementById(dateId);
-                var scd = storage.getItem(dateId);
+                var dateId = '' + thisYear + (thisMonth+1) + thisDate;
+                var tmp = document.getElementById(thisDate);
+                var scd = storage.getItem(thisDate);
                 var k = 0;
                 while(k <= 24){
                     if(storage.getItem(dateId + k) != null){
