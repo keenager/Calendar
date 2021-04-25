@@ -34,7 +34,7 @@
             var li = opener.document.createElement('li');
             var time = document.getElementById('time').value;
             var contents = document.getElementById('contents').value;
-            var contentsId = '' + opener.thisYear + (opener.thisMonth+1) + opener.dateId + time;
+            var contentsId = '' + opener.thisYear + (opener.thisMonth+1) + opener.thidDate + time;
             opener.storage.setItem(contentsId, contents);
             //opener.document.getElementById(String(opener.dateId)).appendChild(li).textContent = contents;
             opener.deleteCalendar();

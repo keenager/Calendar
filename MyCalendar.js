@@ -131,8 +131,8 @@ function openInputWindow(self){
     //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
     inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
-    dateId = self.id;
-    thisDay = self.class;
+    thisDate = Number(self.id);
+    thisDay = Number(self.class);
     //inputWindow.document.getElementById('dateId').innerText = self.id;
 
         // storage.setItem(self.id, schedule);
