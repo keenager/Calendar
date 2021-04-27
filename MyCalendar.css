@@ -13,12 +13,12 @@ thead {
   height: fit-content; 
 }
 
-.daynum{
+.day1, .day2, .day3, .day4, .day5, .day6, .day7{
   height: fit-content;
   text-align: left;
 }
 
-.day1, .day2, .day3, .day4, .day5, .day6, .day7{
+.contents{
   height: 80%;
   text-align: left;
 }

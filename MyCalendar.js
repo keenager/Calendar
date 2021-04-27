@@ -3,10 +3,12 @@ var thisYear = present.getFullYear();
 var thisMonth = present.getMonth();  // 달 0~11
 var thisDate = present.getDate();  // 날짜 1~31
 var thisDay = present.getDay();  // 요일 0~6   일요일 = 0, 월요일 = 1
+var thisTime = 0;
 var firstDay = 0;
 var lastDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 var thisLastDay = 0;
 var inputWindow;
+var changeWindow;
 var dateId = '';
 var contentsId = '';
 var storage = window.localStorage;
@@ -52,21 +54,23 @@ function displayCalendar(){
                 //dateId = '' + thisYear + (thisMonth+1) + thisDate;
                 week.insertAdjacentHTML('beforeend', `
                     <td>
-                        <div class='daynum'>${thisDate}</div>
-                        <div class="day${j}" id="${thisDate}" onclick="openInputWindow(this)"> </div>
+                        <div class="day${j}" onclick="openInputWindow(this)">${thisDate}</div><div class="contents" id="${thisDate}"> </div>
                     </td>
                 `);
                 
-/* li 마다 id값을 부여하고 반복문으로 불러낼 것인가... or 웹 데이터베이스 공부? */
-
                 var dateId = '' + thisYear + (thisMonth+1) + thisDate;
-                var tmp = document.getElementById(thisDate);
-                var scd = storage.getItem(thisDate);
+                var contents = document.getElementById(thisDate);
                 var k = 0;
                 while(k <= 24){
                     if(storage.getItem(dateId + k) != null){
-                        var li = document.createElement('li');
-                        tmp.appendChild(li).textContent = k + '시: ' + storage.getItem(dateId + k);
+                        contents.insertAdjacentHTML('beforeend', `
+                            <li id="${dateId}_${k}" onclick="openChangeWindow(this)">
+                                ${k}시: ${storage.getItem(dateId + k)}
+                            </li>
+                        `);
+
+                        // var li = document.createElement('li');
+                        // contents.appendChild(li).textContent = k + '시: ' + storage.getItem(dateId + k);
                     }
                     k++;
                 }
@@ -130,7 +134,7 @@ function nextMonth(){
 function openInputWindow(self){
     //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
-    thisDate = Number(self.id);    
+    thisDate = Number(self.textContent);    
     thisDay = Number(self.className.split("")[3]);
     inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
     
@@ -140,5 +144,13 @@ function openInputWindow(self){
         // var li = document.createElement('li');
         // self.appendChild(li).textContent = schedule;    
     
+}
+
+function openChangeWindow(self){ 
+    thisDate = Number(self.parentNode.id);    
+    thisDay = Number(self.parentNode.previousSibling.className.split("")[3]);
+    thisTime = Number(self.id.split("_")[1]);
+    changeWindow = window.open('changeWindow.html', 'status = no, toolbar = no');
+
 }
 

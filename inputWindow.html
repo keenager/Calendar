@@ -11,8 +11,8 @@
         <legend><span id="date"></span>의 일정을 입력하세요.</legend>
         <label for="time">시각(0~24): </label>
         <input type="number" min="0" max="24" list="numberList" id="time" style="width: 3.5em; text-align: right;"/>시
-        <datalist id="numberList">
-        </datalist><br>
+            <datalist id="numberList">
+            </datalist><br>
         <textarea name="" id="contents" cols="30" rows="5"></textarea>
         <button onclick="setSchedule()">저장&닫기</button>
     </fieldset>
@@ -31,16 +31,16 @@
 
         document.getElementById('date').textContent = `${opener.thisYear}년 ${opener.thisMonth+1}월 ${opener.thisDate}일`;
         function setSchedule(){
-            var li = opener.document.createElement('li');
-            var time = document.getElementById('time').value;
-            var contents = document.getElementById('contents').value;
-            var contentsId = '' + opener.thisYear + (opener.thisMonth+1) + opener.thisDate + time;
-            opener.storage.setItem(contentsId, contents);
-            //opener.document.getElementById(String(opener.dateId)).appendChild(li).textContent = contents;
-            opener.deleteCalendar();
-            opener.displayCalendar();   // 달력 갱신할 때 날짜와 그 날짜의 요일이 필요하다.
+            //var contents = document.getElementById('contents').value;
+            if(contents.value.length != 0){     // contents 내용 없을 때 저장 안되게 하기...  4/30에 아무 내용 없이 저장 눌렀을 때, 4/3 0시 생성 문제...
+                var time = document.getElementById('time').value;
+                var contentsId = '' + opener.thisYear + (opener.thisMonth+1) + opener.thisDate + time;
+                opener.storage.setItem(contentsId, contents);
+                opener.deleteCalendar();
+                opener.displayCalendar();   // 달력 갱신할 때 날짜와 그 날짜의 요일이 필요하다.
+            }
             window.close();
-        }
+        }     
     </script>
 </body>
 </html>
