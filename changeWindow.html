@@ -3,7 +3,7 @@
 <head>
     <title>일정 수정/삭제</title>
     <meta charset="utf8">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="MyCalendar.css">
     <script src="MyCalendar.js"></script>
 </head>
 <body>
@@ -16,8 +16,10 @@
 
     <script>
         document.getElementById('datetime').textContent = `${opener.thisYear}년 ${opener.thisMonth+1}월 ${opener.thisDate}일 ${opener.thisTime}시`;
-        
+
         var contentsId = '' + opener.thisYear + opener.modifyMonth(opener.thisMonth) + opener.modifyDate(opener.thisDate) + '_' + opener.thisTime;
+        document.getElementById('contents').value = opener.storage.getItem(contentsId);
+
         function updateSchedule(){
             let contents = document.getElementById('contents').value;
             if(contents.length != 0){

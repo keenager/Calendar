@@ -160,14 +160,7 @@ function openInputWindow(self){
     //console.log('현재 객체는 ' + self);
     thisDate = Number(self.textContent);    
     thisDay = Number(self.className.split("")[3]);
-    inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');
-    
-    //inputWindow.document.getElementById('dateId').innerText = self.id;
-
-        // storage.setItem(self.id, schedule);
-        // var li = document.createElement('li');
-        // self.appendChild(li).textContent = schedule;    
-    
+    inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');    
 }
 
 function openChangeWindow(self){ 
@@ -175,6 +168,5 @@ function openChangeWindow(self){
     thisDay = Number(self.parentNode.previousSibling.className.split("")[3]);
     thisTime = Number(self.id.split("_")[1]);
     changeWindow = window.open('changeWindow.html', 'status = no, toolbar = no');
-
 }
 

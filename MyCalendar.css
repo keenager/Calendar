@@ -9,8 +9,12 @@ thead {
   height: fit-content; 
 }
 
+#yearMonth{
+  font-size: 2rem;
+}
+
 button{
-  height: 30px;
+  height: 2.5rem;
 }
 
 td {
@@ -29,4 +33,17 @@ td {
 .contents{
   height: 80%;
   text-align: left;
+}
+
+fieldset{
+  font-size: 2rem;
+  width: fit-content;
+}
+
+input{
+  height: 2rem;
+}
+
+input, textarea, button{
+  font-size: 2rem;
 }
