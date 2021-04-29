@@ -30,11 +30,12 @@
         // dateId 외에 개별 일정마다 시간을 추가한 contentsId 부여하여 개별 일정 구별하여 저장하기.
 
         document.getElementById('date').textContent = `${opener.thisYear}년 ${opener.thisMonth+1}월 ${opener.thisDate}일`;
+
         function setSchedule(){
-            //var contents = document.getElementById('contents').value;
-            if(contents.value.length != 0){     // contents 내용 없을 때 저장 안되게 하기...  4/30에 아무 내용 없이 저장 눌렀을 때, 4/3 0시 생성 문제...
-                var time = document.getElementById('time').value;
-                var contentsId = '' + opener.thisYear + (opener.thisMonth+1) + opener.thisDate + time;
+            let contents = document.getElementById('contents').value;
+            if(contents.length != 0){     // contents 내용 없을 때 저장 안되게 하기...  4/30에 아무 내용 없이 저장 눌렀을 때, 4/3 0시 생성 문제...
+                let time = document.getElementById('time').value;
+                let contentsId = '' + opener.thisYear + opener.modifyMonth(opener.thisMonth) + opener.modifyDate(opener.thisDate) + '_' + time;
                 opener.storage.setItem(contentsId, contents);
                 opener.deleteCalendar();
                 opener.displayCalendar();   // 달력 갱신할 때 날짜와 그 날짜의 요일이 필요하다.

@@ -10,19 +10,24 @@
     <fieldset style="width: fit-content;">
         <legend><span id="datetime"></span>의 일정을 수정/삭제 하세요.</legend>
         <textarea name="" id="contents" cols="30" rows="5"></textarea>
-        <button onclick="setSchedule()">수정&닫기</button>
+        <button onclick="updateSchedule()">수정&닫기</button>
         <button onclick="deleteSchedule()">삭제&닫기</button>
     </fieldset>
 
     <script>
         document.getElementById('datetime').textContent = `${opener.thisYear}년 ${opener.thisMonth+1}월 ${opener.thisDate}일 ${opener.thisTime}시`;
-        var contentsId = '' + opener.thisYear + (opener.thisMonth+1) + opener.thisDate + opener.thisTime;
-        function setSchedule(){
-            var contents = document.getElementById('contents').value;
-            opener.storage.setItem(contentsId, contents);
-            opener.deleteCalendar();
-            opener.displayCalendar();   // 달력 갱신할 때 날짜와 그 날짜의 요일이 필요하다.
-            window.close();
+        
+        var contentsId = '' + opener.thisYear + opener.modifyMonth(opener.thisMonth) + opener.modifyDate(opener.thisDate) + '_' + opener.thisTime;
+        function updateSchedule(){
+            let contents = document.getElementById('contents').value;
+            if(contents.length != 0){
+                opener.storage.setItem(contentsId, contents);
+                opener.deleteCalendar();
+                opener.displayCalendar();   // 달력 갱신할 때 날짜와 그 날짜의 요일이 필요하다.
+                window.close();
+            } else{
+                deleteSchedule();
+            }
         }
         function deleteSchedule(){
             opener.storage.removeItem(contentsId);

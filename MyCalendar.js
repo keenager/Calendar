@@ -13,6 +13,17 @@ var dateId = '';
 var contentsId = '';
 var storage = window.localStorage;
 
+function modifyMonth(m){
+    let month = m + 1;
+    let modifiedMonth = month < 10 ? '0'+month : month; 
+    return modifiedMonth;
+}
+
+function modifyDate(d){
+    let modifiedDate = d < 10 ? '0'+d : d; 
+    return modifiedDate;
+}
+
 function getFirstDay(thisDate, thisDay){    //해당 월의 1일의 요일
     if(thisDay === 0) thisDay = 7;
     var temp = thisDate % 7;
@@ -43,10 +54,10 @@ function displayCalendar(){
     //var cnt = 0;
     thisDate = 1;
     loop1:
-    for(var i = 1; i <= 6; i++){
-        var week = document.getElementById('w'+i);
+    for(let i = 1; i <= 6; i++){
+        let week = document.getElementById('w'+i);
         loop2:
-        for(var j = 1; j <= 7; j++){
+        for(let j = 1; j <= 7; j++){
             if(i===1 && j<firstDay){
                 week.insertAdjacentHTML('beforeend', '<td></td>');
             }else{
@@ -57,17 +68,30 @@ function displayCalendar(){
                         <div class="day${j}" onclick="openInputWindow(this)">${thisDate}</div><div class="contents" id="${thisDate}"> </div>
                     </td>
                 `);
-                
-                var dateId = '' + thisYear + (thisMonth+1) + thisDate;
-                var contents = document.getElementById(thisDate);
-                var k = 0;
+
+                let contentsPart = document.getElementById(thisDate);
+
+                if(thisYear === present.getFullYear() && thisMonth === present.getMonth() && thisDate === present.getDate()){
+                    contentsPart.parentNode.setAttribute('style', 'border: 2px solid blue;');
+                }
+                let k = 0;
                 while(k <= 24){
-                    if(storage.getItem(dateId + k) != null){
-                        contents.insertAdjacentHTML('beforeend', `
-                            <li id="${dateId}_${k}" onclick="openChangeWindow(this)">
-                                ${k}시: ${storage.getItem(dateId + k)}
-                            </li>
-                        `);
+                    dateId = '' + thisYear + modifyMonth(thisMonth) + modifyDate(thisDate) + '_' + k;
+                    let scd = storage.getItem(dateId);
+                    if(scd != null){
+                        if(scd.includes('판결 선고') || scd.includes('판결선고')){
+                            contentsPart.insertAdjacentHTML('beforeend', `
+                                <div id="${dateId}" onclick="openChangeWindow(this)">
+                                    X ${k}시: ${storage.getItem(dateId)}
+                                </div>
+                            `);
+                        } else{
+                            contentsPart.insertAdjacentHTML('beforeend', `
+                                <li id="${dateId}" onclick="openChangeWindow(this)">
+                                    ${k}시: ${storage.getItem(dateId)}
+                                </li>
+                            `);
+                        }
 
                         // var li = document.createElement('li');
                         // contents.appendChild(li).textContent = k + '시: ' + storage.getItem(dateId + k);
