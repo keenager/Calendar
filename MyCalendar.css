@@ -30,9 +30,16 @@ td {
   width: fit-content;
 }
 
-.contents{
+.contentsWrap{
   height: 80%;
   text-align: left;
+}
+
+.contents{
+  width: fit-content;
+  border-radius: 5px / 5px;
+  background-color: gold;
+  margin-bottom: 1px;
 }
 
 fieldset{

@@ -64,40 +64,34 @@ function displayCalendar(){
                 //cnt++;
                 //dateId = '' + thisYear + (thisMonth+1) + thisDate;
                 week.insertAdjacentHTML('beforeend', `
-                    <td>
-                        <div class="day${j}" onclick="openInputWindow(this)">${thisDate}</div><div class="contents" id="${thisDate}"> </div>
+                    <td onclick="openInputWindow(this)">
+                        <div class="day${j}">${thisDate}</div>
+                        <div class="contentsWrap" id="${thisDate}"></div>
                     </td>
                 `);
 
+                // 오늘이면 강조 표시
                 let contentsPart = document.getElementById(thisDate);
-
                 if(thisYear === present.getFullYear() && thisMonth === present.getMonth() && thisDate === present.getDate()){
                     contentsPart.parentNode.setAttribute('style', 'border: 2px solid blue;');
                 }
-                let k = 0;
-                while(k <= 24){
-                    dateId = '' + thisYear + modifyMonth(thisMonth) + modifyDate(thisDate) + '_' + k;
-                    let scd = storage.getItem(dateId);
-                    if(scd != null){
-                        if(scd.includes('판결 선고') || scd.includes('판결선고')){
-                            contentsPart.insertAdjacentHTML('beforeend', `
-                                <div id="${dateId}" onclick="openChangeWindow(this)">
-                                    X ${k}시: ${storage.getItem(dateId)}
-                                </div>
-                            `);
-                        } else{
-                            contentsPart.insertAdjacentHTML('beforeend', `
-                                <li id="${dateId}" onclick="openChangeWindow(this)">
-                                    ${k}시: ${storage.getItem(dateId)}
-                                </li>
-                            `);
-                        }
 
-                        // var li = document.createElement('li');
-                        // contents.appendChild(li).textContent = k + '시: ' + storage.getItem(dateId + k);
+                dateId = '' + thisYear + modifyMonth(thisMonth) + modifyDate(thisDate);
+                let scd = storage.getItem(dateId);
+
+                // 스토리지에는 함께 저장돼있어도 출력할 때는 별개 항목으로 출력 필요.
+
+                if(scd != null){
+                    let splitedScd = scd.split('\n');
+                    for(let e of splitedScd){
+                        if(e.includes('판결')){
+                            e = 'X ' + e;
+                        } else{
+                            e = '&nbsp;&nbsp;&nbsp;&nbsp;' + e;
+                        } 
+                        contentsPart.insertAdjacentHTML('beforeend', `<div class="contents">${e}</div>`);
                     }
-                    k++;
-                }
+                }                
                 if(thisDate === lastDate[thisMonth]){
                     thisLastDay = j;
                     break loop1;
@@ -158,15 +152,7 @@ function nextMonth(){
 function openInputWindow(self){
     //var schedule = prompt('일정을 입력하세요');
     //console.log('현재 객체는 ' + self);
-    thisDate = Number(self.textContent);    
-    thisDay = Number(self.className.split("")[3]);
+    thisDate = Number(self.childNodes[1].textContent); 
+    thisDay = Number(self.childNodes[1].className.split("")[3]);
     inputWindow = window.open('inputWindow.html', 'status = no, toolbar = no');    
 }
-
-function openChangeWindow(self){ 
-    thisDate = Number(self.parentNode.id);    
-    thisDay = Number(self.parentNode.previousSibling.className.split("")[3]);
-    thisTime = Number(self.id.split("_")[1]);
-    changeWindow = window.open('changeWindow.html', 'status = no, toolbar = no');
-}
-
