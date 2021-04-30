@@ -85,9 +85,9 @@ function displayCalendar(){
                     let splitedScd = scd.split('\n');
                     for(let e of splitedScd){
                         if(e.includes('판결')){
-                            e = 'X ' + e;
+                            e = 'X ' + e + '&nbsp;&nbsp;';
                         } else{
-                            e = '&nbsp;&nbsp;&nbsp;&nbsp;' + e;
+                            e = '&nbsp;&nbsp;&nbsp;&nbsp;' + e + '&nbsp;&nbsp;';
                         } 
                         contentsPart.insertAdjacentHTML('beforeend', `<div class="contents">${e}</div>`);
                     }
