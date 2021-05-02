@@ -5,11 +5,26 @@
     <meta charset="utf8">
     <link rel="stylesheet" href="MyCalendar.css">
     <!-- <script src="MyCalendar.js"></script> -->
+    <style>
+        #contentsPart{
+            position: relative;
+        }
+        .autocomplete-items{
+            position: absolute;
+            z-index: 99;
+        }
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff; 
+            border-bottom: 1px solid #d4d4d4; 
+        }
+    </style>
 </head>
 <body>
     <fieldset>
         <legend><span id="date"></span>의 일정을 입력하세요.</legend>
-        <textarea name="" id="contents" cols="30" rows="5" autofocus></textarea>
+        <textarea name="" id="contentsPart" cols="30" rows="5" autofocus></textarea>
         <button onclick="setSchedule()">저장&닫기</button>
         <button onclick="deleteSchedule()">삭제&닫기</button>
     </fieldset>
@@ -17,10 +32,11 @@
     <script>
         document.getElementById('date').textContent = `${opener.thisYear}년 ${opener.thisMonth+1}월 ${opener.thisDate}일`;
         var contentsId = '' + opener.thisYear + opener.modifyMonth(opener.thisMonth) + opener.modifyDate(opener.thisDate);
-        document.getElementById('contents').value = opener.storage.getItem(contentsId);
+        var contentsPart = document.getElementById('contentsPart');
+        contentsPart.value = opener.storage.getItem(contentsId);
 
         function setSchedule(){
-            let contents = document.getElementById('contents').value;
+            let contents = contentsPart.value;
             if(contents.length != 0){     // contents 내용 없을 때 저장 안되게 하기...  4/30에 아무 내용 없이 저장 눌렀을 때, 4/3 0시 생성 문제...
                 opener.storage.setItem(contentsId, contents);
                 opener.deleteCalendar();
@@ -37,6 +53,54 @@
             opener.displayCalendar();   // 달력 갱신할 때 날짜와 그 날짜의 요일이 필요하다.
             window.close();
         }
+
+        contentsPart.addEventListener('input', function(e){
+            if(e.target.value.includes('ㅈㅇ ')){
+                e.target.value = e.target.value.replace('ㅈㅇ ', '중앙지법 ');
+            }
+            if(e.target.value.includes('ㄴㅂ ')){
+                e.target.value = e.target.value.replace('ㄴㅂ ', '남부지법 ');
+            }
+            if(e.target.value.includes('ㅅㅇ')){
+                autoCourtName(e, 'ㅅㅇ', '수원고등', '수원지법');
+            }
+        });
+     
+        function autoCourtName(event, abv, court1, court2){
+            let parentDiv, childDiv;
+
+            parentDiv = document.createElement('div');
+            parentDiv.setAttribute('class', 'autocomplete-items');
+            event.target.after(parentDiv);
+            
+            childDiv = document.createElement('div');
+            childDiv.textContent = court1;
+            childDiv.setAttribute('id', court1)
+            parentDiv.appendChild(childDiv);
+
+            childDiv = document.createElement('div');
+            childDiv.textContent = court2;
+            childDiv.setAttribute('id', court2)
+            parentDiv.appendChild(childDiv);
+
+            document.getElementById(court1).addEventListener('click', function(event){
+                contentsPart.value = contentsPart.value.replace(abv, court1 + ' ');
+                removeElementsByClassName('autocomplete-items')
+            });
+            document.getElementById(court2).addEventListener('click', function(event){
+                contentsPart.value = contentsPart.value.replace(abv, court2 + ' ');
+                removeElementsByClassName('autocomplete-items')
+            });
+        }
+
+        function removeElementsByClassName(className){
+            let element = document.getElementsByClassName(className);
+            while(element.length > 0){
+                element[0].parentNode.removeChild(element[0]);
+            }
+        }
+
+      
     </script>
 </body>
 </html>
