@@ -55,52 +55,59 @@
         }
 
         contentsPart.addEventListener('input', function(e){
-            if(e.target.value.includes('ㅈㅇ ')){
-                e.target.value = e.target.value.replace('ㅈㅇ ', '중앙지법 ');
+
+            for(key in Auto){
+                if(e.target.value.includes(key + ' ')){
+                e.target.value = e.target.value.replace(key + ' ', Auto[key] + ' ');
+                }
             }
-            if(e.target.value.includes('ㄴㅂ ')){
-                e.target.value = e.target.value.replace('ㄴㅂ ', '남부지법 ');
-            }
-            if(e.target.value.includes('ㅅㅇ')){
-                autoCourtName(e, 'ㅅㅇ', '수원고등', '수원지법');
-            }
+
+            // if(e.target.value.includes('ㅅㅇ')){
+            //     autoCourtName(e, 'ㅅㅇ', '수원고등', '수원지법');
+            // }
         });
-     
-        function autoCourtName(event, abv, court1, court2){
-            let parentDiv, childDiv;
 
-            parentDiv = document.createElement('div');
-            parentDiv.setAttribute('class', 'autocomplete-items');
-            event.target.after(parentDiv);
-            
-            childDiv = document.createElement('div');
-            childDiv.textContent = court1;
-            childDiv.setAttribute('id', court1)
-            parentDiv.appendChild(childDiv);
-
-            childDiv = document.createElement('div');
-            childDiv.textContent = court2;
-            childDiv.setAttribute('id', court2)
-            parentDiv.appendChild(childDiv);
-
-            document.getElementById(court1).addEventListener('click', function(event){
-                contentsPart.value = contentsPart.value.replace(abv, court1 + ' ');
-                removeElementsByClassName('autocomplete-items')
-            });
-            document.getElementById(court2).addEventListener('click', function(event){
-                contentsPart.value = contentsPart.value.replace(abv, court2 + ' ');
-                removeElementsByClassName('autocomplete-items')
-            });
+        const Auto = {
+            ㅈㅇ : '중앙지법',
+            ㄴㅂ : '남부지법',
+            ㅅㅇㄱ : '수원고등',
+            ㅅㅇㅈ : '수원지법',
+            ㅈㅍ : '재판',
+            ㅍㄱ : '판결',
         }
-
-        function removeElementsByClassName(className){
-            let element = document.getElementsByClassName(className);
-            while(element.length > 0){
-                element[0].parentNode.removeChild(element[0]);
-            }
-        }
-
       
+        // function autoCourtName(event, abv, court1, court2){
+        //     let parentDiv, childDiv;
+
+        //     parentDiv = document.createElement('div');
+        //     parentDiv.setAttribute('class', 'autocomplete-items');
+        //     event.target.after(parentDiv);
+            
+        //     childDiv = document.createElement('div');
+        //     childDiv.textContent = court1;
+        //     childDiv.setAttribute('id', court1)
+        //     parentDiv.appendChild(childDiv);
+        //     document.getElementById(court1).addEventListener('click', function(event){
+        //         contentsPart.value = contentsPart.value.replace(abv, court1 + ' ');
+        //         removeElementsByClassName('autocomplete-items')
+        //     });
+
+        //     childDiv = document.createElement('div');
+        //     childDiv.textContent = court2;
+        //     childDiv.setAttribute('id', court2)
+        //     parentDiv.appendChild(childDiv);
+        //     document.getElementById(court2).addEventListener('click', function(event){
+        //         contentsPart.value = contentsPart.value.replace(abv, court2 + ' ');
+        //         removeElementsByClassName('autocomplete-items')
+        //     });
+        // }
+
+        // function removeElementsByClassName(className){
+        //     let element = document.getElementsByClassName(className);
+        //     while(element.length > 0){
+        //         element[0].parentNode.removeChild(element[0]);
+        //     }
+        // }
     </script>
 </body>
 </html>
