@@ -23,56 +23,14 @@
     </style>
 </head>
 <body>
-    <h1>To do list</h1>
+    <h1>오늘의 할 일</h1>
     <input type="text" autofocus>
     <button>+</button>
-    <div id="list">
+    <div id="list">    </div>
 
-    </div>
+    <p>나갔다 와도 체크 여부 유지되게 하기. 체크 여부가 캘린더에도 반영되게 하기.</p>
 
-    <script>
-        document.querySelector('input').addEventListener('keyup', (event)=>{
-            if(event.keyCode === 13){
-                event.preventDefault();
-                document.querySelector('button').click();
-            }
-        });
-
-        document.querySelector('button').addEventListener('click', (event)=>{
-            let inputContent = document.querySelector('input').value;
-            let list = document.getElementById('list');
-
-            let newItem = createDivIn(list);
-            newItem.classList.add('items');
-
-            let content = createDivIn(newItem);
-            content.textContent = inputContent;
-            content.classList.add('contents');
-            content.addEventListener('click', (event)=>{
-                if(event.target.classList.contains('checked')){
-                    event.target.classList.remove('checked');
-                }else{
-                    event.target.classList.add('checked');
-                }
-            })
-
-            let del = createDivIn(newItem);
-            del.textContent = 'X';
-            del.classList.add('del');
-            del.addEventListener('click', (event)=>{
-                delItem(event.target.parentNode);
-            });
-
-            document.querySelector('input').value = '';
-
-        })
-        function createDivIn(elem){
-            return elem.appendChild(document.createElement('div'));
-        }
-        function delItem(elem){
-            elem.parentNode.removeChild(elem);
-        }
-        
-    </script>
+    <script src="MyCalendar.js"></script>
+    <script src="todolist.js"></script>
 </body>
 </html>

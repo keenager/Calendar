@@ -13,6 +13,9 @@ var dateId = '';
 var contentsId = '';
 var storage = window.localStorage;
 
+displayTitle();
+displayCalendar();
+
 function modifyMonth(m){
     let month = m + 1;
     let modifiedMonth = month < 10 ? '0'+month : month; 
@@ -102,10 +105,6 @@ function displayCalendar(){
         }
     }
 }
-
-displayTitle();
-displayCalendar();
-
 
 function presentMonth(){
     thisYear = present.getFullYear();
